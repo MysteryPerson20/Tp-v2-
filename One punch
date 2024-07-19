@@ -3,7 +3,7 @@
 -- Variables
 local player = game.Players.LocalPlayer
 local targetPosition = Vector3.new(-30, 653, -432)  -- Target coordinates
-local teleportDuration = 6  -- Duration to stay at target position in seconds
+local teleportDuration = 5.3  -- Duration to stay at target position in seconds
 local originalPosition = nil
 local character = player.Character or player.CharacterAdded:Wait()  -- Ensure character is available
 
