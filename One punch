@@ -1,0 +1,44 @@
+-- LocalScript to teleport to a position for 6 seconds and then return to the original position
+
+-- Variables
+local player = game.Players.LocalPlayer
+local targetPosition = Vector3.new(-30, 653, -432)  -- Target coordinates
+local teleportDuration = 6  -- Duration to stay at target position in seconds
+local originalPosition = nil
+local character = player.Character or player.CharacterAdded:Wait()  -- Ensure character is available
+
+-- Function to teleport the player to a specific position
+local function teleportTo(position)
+    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart then
+        humanoidRootPart.CFrame = CFrame.new(position)
+    end
+end
+
+-- Function to save the player's original position
+local function saveOriginalPosition()
+    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart then
+        originalPosition = humanoidRootPart.Position
+    end
+end
+
+-- Function to handle teleportation and returning
+local function teleportAndReturn()
+    -- Save the original position
+    saveOriginalPosition()
+    
+    -- Teleport to the target position
+    teleportTo(targetPosition)
+    
+    -- Wait for the specified duration
+    wait(teleportDuration)
+    
+    -- Teleport back to the original position
+    if originalPosition then
+        teleportTo(originalPosition)
+    end
+end
+
+-- Execute the teleport and return function
+teleportAndReturn()
